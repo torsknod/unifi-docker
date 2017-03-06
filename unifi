@@ -1,1 +1,1 @@
-JSVC_OPTS="-user unifi"
+JSVC_OPTS="-user unifi -nodetach"
