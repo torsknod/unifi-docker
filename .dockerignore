@@ -1,5 +1,5 @@
 data
-docker-compose.yaml
+docker-compose.yml
 .gitignore
 LICENSE
 log
