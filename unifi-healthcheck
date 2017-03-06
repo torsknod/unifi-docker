@@ -1,0 +1,23 @@
+#!/bin/bash
+set -x
+UNIFIDIR=/usr/lib/unifi
+UNIFIRUNDIR=${UNIFIDIR}/run
+UNIFIPIDFILE=${UNIFIRUNDIR}/unifi.pid
+UNIFIPID=$(cat ${UNIFIPIDFILE})
+PROCDIR=/proc/${UNIFIPID}
+if /etc/init.d/unifi status; then
+  if test -d ${PROCDIR}; then
+    let result=0;
+    for udp_port in 3478; do
+      if grep -i ": 00000000000000000000000000000000:$(printf '%04X' ${udp_port}) 00000000000000000000000000000000:0000 " ${PROCDIR}/net/udp6; then let result=0; else let result=1; fi;
+    done;
+    for tcp_port in 8080 8443 8880 8843; do
+      if grep -i ": 00000000000000000000000000000000:$(printf '%04X' ${tcp_port}) 00000000000000000000000000000000:0000 " ${PROCDIR}/net/tcp6; then let result=0; else let result=1; fi;
+    done;
+    exit $result;
+  else
+    exit 1;
+  fi;
+else
+  exit 1;
+fi
