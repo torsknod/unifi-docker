@@ -1,0 +1,19 @@
+networks: {}
+services:
+  unifi:
+    build:
+      context: .
+    container_name: unifi
+    logging:
+      driver: syslog
+    mem_limit: 1G
+    network_mode: host
+    tmpfs:
+    - /run
+    - /run/lock
+    - /tmp
+    volumes:
+    - ./data:/var/lib/unifi:rw
+    - ./log:/var/log:rw
+version: '2.1'
+volumes: {}
