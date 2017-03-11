@@ -1,1 +1,5 @@
-JSVC_OPTS="-user unifi -nodetach"
+JSVC_EXTRA_OPTS="-user unifi -nodetach -errfile /var/logs/unifi_jsvc.err -outfile /var/log/unifi_jsvc.log"
+[ -d /var/logs/unifi ] || mkdir /var/logs/unifi
+[ -d /var/run/unifi ] || mkdir /var/run/unifi
+chown unifi:unifi /var/{run,logs}/unifi
+chmod 755 /var/{run,logs}/unifi
