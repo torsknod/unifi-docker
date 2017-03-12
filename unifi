@@ -1,6 +1,5 @@
 JSVC_EXTRA_OPTS="-user unifi -nodetach -errfile /var/log/unifi_jsvc.err -outfile /var/log/unifi_jsvc.log"
-for d in log run; do
-  DIR=/var/$d/unifi
+for DIR in "${LOGDIR}" "${RUNDIR}"; do
   [ -d $DIR ] || mkdir $DIR
   chown unifi:unifi $DIR
   chmod 755 $DIR

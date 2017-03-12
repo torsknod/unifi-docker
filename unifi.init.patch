@@ -1,0 +1,17 @@
+--- /usr/lib/unifi/bin/unifi.init	2016-12-09 21:23:07.000000000 +0100
++++ /usr/lib/unifi/bin/unifi.init	2017-03-12 23:32:42.071434094 +0100
+@@ -156,10 +156,10 @@ dir_symlink_fix ${RUNDIR} ${RUNLINK}
+ #JSVC_OPTS="-debug"
+ 
+ # check whether jsvc requires -cwd option
+-#${JSVC} -java-home ${JAVA_HOME} -cwd / -help >/dev/null 2>&1
+-#if [ $? -eq 0 ] ; then
+-#	JSVC_OPTS="${JSVC_OPTS} -cwd ${BASEDIR}"
+-#fi
++${JSVC} -java-home ${JAVA_HOME} -cwd / -help >/dev/null 2>&1
++if [ $? -eq 0 ] ; then
++	JSVC_OPTS="${JSVC_OPTS} -cwd ${BASEDIR}"
++fi
+ 
+ JSVC_OPTS="${JSVC_OPTS}\
+  -home ${JAVA_HOME} \

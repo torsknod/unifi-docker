@@ -11,7 +11,7 @@ services:
     tmpfs:
     - /run
     - /run/lock
-    - /tmp
+    - /tmp:exec
     volumes:
     - ./data:/var/lib/unifi:rw
     - ./log:/var/log:rw
