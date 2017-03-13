@@ -5,8 +5,8 @@ VOLUME /var/lib/unifi/ /var/log/
 RUN apt-get -y update && apt-get -y dist-upgrade && apt-get -y install binutils jsvc mongodb patch ufw && useradd --system --user-group --home-dir /usr/lib/unifi unifi
 ADD http://dl.ubnt.com/unifi/5.4.11/unifi_sysvinit_all.deb /tmp/
 RUN dpkg -i /tmp/unifi_sysvinit_all.deb && rm -f /tmp/unifi_sysvinit_all.deb
-ADD unifi.init.patch /tmp/
-RUN patch -fNuli /tmp/unifi.init.patch && rm -f /tmp/unifi.init.patch
+COPY unifi.init.patch /tmp/
+RUN cd / && patch -p0 -fNuli /tmp/unifi.init.patch && rm -f /tmp/unifi.init.patch
 WORKDIR /usr/lib/unifi
 COPY unifi-healthcheck /usr/local/bin/
 COPY rcS ufw unifi /etc/default/
